@@ -11,3 +11,5 @@ included pages and their saved assets.
 
 The site has no build step. It can be served from the repository root with any
 static web host.
+
+## Live Website Demo: https://liamlesser.github.io/PurpleChess/
