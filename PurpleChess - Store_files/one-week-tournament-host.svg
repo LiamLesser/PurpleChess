@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect x="64" y="48" width="188" height="208" rx="22" fill="#f5f3ff" stroke="#6d28d9" stroke-width="12"/>
+  <path d="M64 94h188" stroke="#6d28d9" stroke-width="12"/>
+  <path d="M111 34v34m94-34v34" stroke="#a78bfa" stroke-width="15" stroke-linecap="round"/>
+  <g fill="#c4b5fd">
+    <rect x="91" y="117" width="34" height="29" rx="6"/><rect x="143" y="117" width="34" height="29" rx="6"/><rect x="195" y="117" width="30" height="29" rx="6"/>
+    <rect x="91" y="162" width="34" height="29" rx="6"/><rect x="143" y="162" width="34" height="29" rx="6"/><rect x="195" y="162" width="30" height="29" rx="6"/>
+  </g>
+  <rect x="91" y="207" width="134" height="30" rx="8" fill="#7c3aed"/>
+  <text x="158" y="229" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#fff">ONE WEEK</text>
+  <path d="M294 82h54v29c0 27-9 43-27 51-18-8-27-24-27-51Z" fill="#fbbf24" stroke="#92400e" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M294 92h-20v12c0 16 8 24 24 27m50-39h20v12c0 16-8 24-24 27M321 164v30m-29 12h58m-43-12h28" fill="none" stroke="#f59e0b" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m321 97 5 10 11 2-8 8 2 11-10-5-10 5 2-11-8-8 11-2Z" fill="#fff7ed"/>
+</svg>

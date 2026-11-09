@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="35 15 330 270">
+  <defs>
+    <pattern id="squares" width="54" height="54" patternUnits="userSpaceOnUse">
+      <rect width="54" height="54" fill="#ede9fe"/>
+      <path d="M0 0h27v27H0zm27 27h27v27H27z" fill="#7c3aed"/>
+    </pattern>
+  </defs>
+  <rect x="76" y="24" width="248" height="248" rx="14" fill="#4c1d95"/>
+  <rect x="88" y="36" width="224" height="224" rx="5" fill="url(#squares)" stroke="#c4b5fd" stroke-width="4"/>
+</svg>
