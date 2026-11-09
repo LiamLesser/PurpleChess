@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PurpleChess - Store</title>
+  <link rel="icon" type="image/png" href="./PurpleChess-logo.png">
+
+  <script defer src="./PurpleChess - Store_files/modulepreload-polyfill-B5Qt9EMX.js"></script>
+  <script defer src="./PurpleChess - Store_files/loader-DEKCah66.js"></script>
+  
+  <script defer src="./PurpleChess - Store_files/sidebar-BQ50I4aK.js"></script>
+  <link rel="stylesheet" href="./PurpleChess - Store_files/loader-CQrtZOB-.css">
+  <link rel="stylesheet" href="./PurpleChess - Store_files/collect-m-Nt8DPr.css">
+  <style>
+    .purchase-intro{margin:0 0 1.25rem;color:var(--text-muted);line-height:1.6}
+    .purchase-product{margin-bottom:1.25rem;padding:1rem;border:1px solid rgba(167,139,250,.2);border-radius:12px;background:#140a24}
+    .purchase-product h2{margin-bottom:.35rem;color:var(--void-4);font-size:1.15rem}
+    .purchase-product p{color:var(--text-muted);font-size:.9rem}
+    .purchase-form{display:grid;gap:.85rem}
+    .purchase-label{display:grid;gap:.45rem;color:var(--void-4);font-size:.8rem;font-weight:600;letter-spacing:.04em}
+    .purchase-input{display:flex;align-items:center;gap:.5rem;padding:.7rem .8rem;border:1px solid rgba(167,139,250,.3);border-radius:9px;background:#080410;color:var(--text-muted);font-size:.8rem;letter-spacing:0}
+    .purchase-input input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:var(--text);font:inherit;font-size:.95rem}
+    .purchase-input:focus-within{border-color:var(--void-3);box-shadow:0 0 0 3px rgba(124,58,237,.2)}
+    .purchase-submit{width:100%;padding:.75rem}
+    .rank-buy-btn:disabled{opacity:.55;cursor:not-allowed;filter:grayscale(.4)}
+    .purchase-status{min-height:1.3rem;margin-top:.7rem;color:var(--text-muted);font-size:.88rem;line-height:1.5}
+    .purchase-status.error{color:#fca5a5}
+    .purchase-status.success{color:#86efac}
+    .purchase-results{margin-top:1rem}
+    .purchase-results[hidden]{display:none}
+    .purchase-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem}
+    .purchase-stat{padding:.8rem;border:1px solid rgba(167,139,250,.16);border-radius:10px;background:#140a24}
+    .purchase-stat span{display:block;color:var(--text-muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}
+    .purchase-stat strong{display:block;margin-top:.3rem;color:var(--text);font-size:1.2rem}
+    .purchase-balance{margin:1rem 0;color:var(--void-4);font-weight:600}
+    .purchase-redeem{width:100%;padding:.75rem}
+    .purchase-redeem:disabled{opacity:.55;cursor:not-allowed;filter:grayscale(.4)}
+    .store-container.store-locked>:not(.store-access){display:none}
+    .store-access{max-width:520px;margin:10vh auto 0;padding:2rem;background:linear-gradient(160deg,#140a24,#221047);border:1px solid rgba(167,139,250,.25);border-radius:20px;box-shadow:0 20px 70px #0008,0 0 40px #7c3aed22}
+    .store-access h1{margin:.5rem 0;color:var(--void-4);font-size:1.8rem}
+    .store-access>p{margin-bottom:1.25rem;color:var(--text-muted);line-height:1.6}
+    .store-access form{display:grid;gap:.8rem}
+    .store-access-status{min-height:1.4rem;margin-top:.75rem;color:var(--text-muted);font-size:.9rem}
+    .store-access-status.error{color:#fca5a5}
+    .store-access-status.success{color:#86efac}
+    .store-account{position:fixed;top:1rem;right:1rem;z-index:900;display:flex;align-items:flex-start;gap:.5rem}
+    .store-account[hidden]{display:none}
+    .store-points-button{padding:.7rem 1rem;border:1px solid rgba(167,139,250,.4);border-radius:12px;background:linear-gradient(135deg,#140a24,#221047);color:var(--void-4);font:inherit;font-weight:700;box-shadow:0 8px 26px #0006;cursor:pointer}
+    .store-points-button:hover{border-color:var(--void-3);box-shadow:0 0 24px #7c3aed55}
+    .store-stats-panel{position:absolute;top:calc(100% + .6rem);right:0;width:min(360px,calc(100vw - 2rem));padding:1rem;background:#140a24;border:1px solid rgba(167,139,250,.3);border-radius:14px;box-shadow:0 18px 50px #0009}
+    .store-stats-panel[hidden]{display:none}
+    .store-stats-panel h2{margin-bottom:.8rem;color:var(--void-4);font-size:1.05rem}
+    .store-stats-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem}
+    .store-stats-grid .purchase-stat{padding:.65rem}
+    .store-account-name{margin:0 0 .75rem;color:var(--text-muted);font-size:.85rem}
+    .store-purchase-history{margin-top:.85rem;padding-top:.75rem;border-top:1px solid rgba(167,139,250,.16)}
+    .store-purchase-history h3{margin-bottom:.4rem;color:var(--void-4);font-size:.82rem}
+    .store-purchase-history ul{display:grid;gap:.35rem;list-style:none;color:var(--text-muted);font-size:.78rem}
+    .store-stats-status{margin-top:.7rem;color:var(--text-muted);font-size:.8rem;line-height:1.4}
+    .store-logout{margin-top:.75rem;padding:.4rem .65rem;border:1px solid rgba(167,139,250,.25);border-radius:7px;background:transparent;color:var(--void-4);font:inherit;font-size:.8rem;cursor:pointer}
+    .store-success-banner a{display:inline-block;margin-top:.4rem;color:#ddd6fe;text-decoration:underline}
+    .store-success-banner{margin:1rem 0;padding:1rem 1.25rem;border:1px solid rgba(34,197,94,.42);border-radius:12px;background:linear-gradient(120deg,rgba(20,70,43,.9),rgba(20,10,36,.94));color:#bbf7d0;font-weight:600;line-height:1.5}
+    .store-success-banner[hidden]{display:none}
+    .store-success-banner strong{display:block;color:#86efac}
+    .store-verify-note{margin-top:.7rem;color:var(--text-muted);font-size:.85rem;line-height:1.5}
+    @media(max-width:600px){.store-account{top:.5rem;right:.5rem}.store-container.store-locked .store-access{margin:8vh .75rem 0;padding:1.35rem}.store-points-button{padding:.6rem .75rem;font-size:.85rem}}
+    @media(max-width:480px){.rank-modal-body{padding:1.25rem}.purchase-stats{gap:.45rem}.purchase-stat{padding:.65rem}.purchase-stat strong{font-size:1.05rem}}
+  </style>
+  <link rel="stylesheet" href="./site-audio.css">
+</head>
+
+<body>
+  <div class="page-loader" id="pageLoader" role="status" aria-live="polite">
+    <div class="loader-card">
+      <div class="loader-content">
+        <img src="./PurpleChess-logo.png" alt="" class="loader-logo">
+        <div class="loader">
+          <span>Loading</span>
+          <div class="loader-words" aria-hidden="true">
+            <span class="loader-word">the page</span>
+            <span class="loader-word">the server</span>
+            <span class="loader-word">your game</span>
+            <span class="loader-word">the next move</span>
+            <span class="loader-word">the fun</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>window.addEventListener('load',function(){var l=document.getElementById('pageLoader');if(l){l.classList.add('hidden');setTimeout(function(){l.remove()},500)}});</script>
+
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
+    <span class="icon icon-arrow-right"></span>
+  </button>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <aside class="site-sidebar" id="siteSidebar">
+    <a href="index.html" class="sidebar-header">
+      <img src="./PurpleChess-logo.png" alt="PurpleChess" class="sidebar-logo">
+      <span class="sidebar-title">Home</span>
+    </a>
+    
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-group">
+        <span class="sidebar-group-title">Play</span>
+        <a href="PurpleChess%20-%20Play.html" class="sidebar-nav-link">
+          <span class="icon icon-play"></span>
+          <span>Play</span>
+        </a>
+        <a href="PurpleChess%20-%20Vote.html" class="sidebar-nav-link">
+          <span class="icon icon-check"></span>
+          <span>Vote</span>
+        </a>
+        <a href="PurpleChess%20-%20Combat%20Ranking%20System.html" class="sidebar-nav-link">
+          <img src="./PurpleChess - Store_files/icon-DE1O5OzK.png" alt="" class="icon-trophy-img">
+          <span>Rankings</span>
+        </a>
+      </div>
+      
+      <div class="sidebar-nav-group">
+        <span class="sidebar-group-title">Information</span>
+        <a href="PurpleChess%20-%20Wiki.html" class="sidebar-nav-link">
+          <span class="icon icon-book"></span>
+          <span>Wiki</span>
+        </a>
+        <a href="PurpleChess%20-%20Rules.html" class="sidebar-nav-link">
+          <span class="icon icon-scale"></span>
+          <span>Rules</span>
+        </a>
+        <a href="PurpleChess%20-%20FAQ.html" class="sidebar-nav-link">
+          <span class="icon icon-question"></span>
+          <span>FAQ</span>
+        </a>
+        <a href="PurpleChess%20-%20Changelog.html" class="sidebar-nav-link">
+          <span class="icon icon-clipboard-list"></span>
+          <span>Changelog</span>
+        </a>
+      </div>
+      
+      <div class="sidebar-nav-group">
+        <span class="sidebar-group-title">Community</span>
+        <a href="PurpleChess%20-%20Wiki.html#staff" class="sidebar-nav-link">
+          <span class="icon icon-shield"></span>
+          <span>Staff</span>
+        </a>
+        <a href="PurpleChess%20-%20Media.html" class="sidebar-nav-link">
+          <span class="icon icon-video"></span>
+          <span>Media</span>
+        </a>
+        <a href="PurpleChess%20-%20Apply.html" class="sidebar-nav-link">
+          <span class="icon icon-document"></span>
+          <span>Apply</span>
+        </a>
+        <a href="https://teams.live.com/l/invite/FAAlCMldAfPt_vbtQ?v=g1" class="sidebar-nav-link" target="_blank">
+          <span class="icon icon-chat"></span>
+          <span>Teams</span>
+        </a>
+      </div>
+      
+      <div class="sidebar-nav-group">
+        <span class="sidebar-group-title">Store</span>
+        <a href="PurpleChess%20-%20Store.html" class="sidebar-nav-link active">
+          <span class="icon icon-store"></span>
+          <span>Store</span>
+        </a>
+      </div>
+    </nav>
+    
+    <div class="sidebar-footer">
+      <p>© <span id="sidebarYear">2026</span> PurpleChess</p>
+    </div>
+  </aside>
+
+  <div class="store-container has-sidebar store-locked" id="storeContainer">
+    <section class="store-access" id="storeAccess">
+      <img src="./PurpleChess-logo.png" alt="" class="loader-logo">
+      <h1>PurpleChess Store</h1>
+      <p>Enter your Chess.com username to verify your membership in the PurpleChess club and view your points.</p>
+      <form id="storeAccessForm">
+        <label class="purchase-label" for="storeUsername">CHESS.COM USERNAME
+          <span class="purchase-input"><span>chess.com/member/</span><input id="storeUsername" name="username" type="text" maxlength="25" autocomplete="username" placeholder="your_username" required></span>
+        </label>
+        <button type="submit" class="rank-buy-btn" id="storeAccessSubmit">Enter the store</button>
+      </form>
+      <p class="store-access-status" id="storeAccessStatus" role="status" aria-live="polite"></p>
+    </section>
+
+    <div class="store-account" id="storeAccount" hidden>
+      <button type="button" class="store-points-button" id="storePointsButton" aria-expanded="false" aria-controls="storeStatsPanel"><span id="storeBalance">— PCP</span></button>
+      <section class="store-stats-panel" id="storeStatsPanel" aria-label="Your PurpleChess stats" hidden>
+        <h2>Your PurpleChess stats</h2>
+        <p class="store-account-name" id="storeAccountName"></p>
+        <div class="store-stats-grid">
+          <div class="purchase-stat"><span>Regular games</span><strong id="storeRegularGames">—</strong></div>
+          <div class="purchase-stat"><span>Tournament games</span><strong id="storeTournamentGames">—</strong></div>
+          <div class="purchase-stat"><span>Total games</span><strong id="storeTotalGames">—</strong></div>
+          <div class="purchase-stat"><span>Points earned</span><strong id="storeEarnedPoints">—</strong></div>
+          <div class="purchase-stat"><span>Points spent</span><strong id="storeSpentPoints">—</strong></div>
+          <div class="purchase-stat"><span>Current multiplier</span><strong id="storeMultiplier">1×</strong></div>
+        </div>
+        <div class="store-purchase-history" id="storePurchaseHistory" hidden>
+          <h3>Purchased items</h3>
+          <ul id="storePurchaseList"></ul>
+        </div>
+        <p class="store-stats-status" id="storeStatsStatus" role="status" aria-live="polite"></p>
+        <button type="button" class="store-logout" id="storeSignOut">Sign out</button>
+      </section>
+    </div>
+
+    <div class="store-success-banner" id="storeSuccessBanner" role="status" aria-live="polite" hidden></div>
+    <div class="logo-section">
+      <img src="./PurpleChess-logo.png" alt="PurpleChess logo" class="v-logo">
+    </div>
+
+    <h1 class="store-title animate-slide-up delay-1">
+      <span class="icon icon-store"></span>Purple Store
+    </h1>
+    <p class="store-subtitle animate-slide-up delay-2">Play and redeem exclusive perks!</p>
+
+    <div class="wiki-info-box animate-slide-up delay-2">
+      <div class="wiki-info-icon"><span class="icon icon-info"></span></div>
+      <div class="wiki-info-content">
+        <h4>Important</h4>
+        <p>Earn PCP by playing in the club: regular games are worth 1 point and tournament games are worth 3. Redeeming opens a prefilled email request to Liam in your email app. Spent points are saved in this browser.</p>
+      </div>
+    </div>
+
+        <div class="store-nav animate-slide-up delay-3">
+      <button class="store-nav-btn active" data-category="ranks">
+        <span class="icon icon-star"></span>
+        <span>Multipliers</span>
+      </button>
+      <button class="store-nav-btn" data-category="crates">
+        <span class="icon icon-gift"></span>
+        <span>Shoutouts</span>
+      </button>
+      <button class="store-nav-btn" data-category="tags">
+        <span class="icon icon-chat"></span>
+        <span>Spotlights</span>
+      </button>
+      <button class="store-nav-btn" data-category="practice">
+        <span class="icon icon-bolt"></span>
+        <span>Passes</span>
+      </button>
+    </div>
+
+        <div class="store-section active" id="store-ranks">
+      <h2 class="store-section-title">
+        <span class="icon icon-star"></span>PurpleChess Point Multipliers
+      </h2>
+      <div class="ranks-grid">
+        <div class="rank-card animate-float-in delay-3" data-rank="nebula">
+          <img src="./PurpleChess - Store_files/point-multiplier-1-5.svg" alt="Purple chess medallion marked PCP with 1.5x below" class="rank-image">
+          <div class="rank-info">
+            <h3 class="rank-name">1.5x PurpleChess Point Multiplier</h3>
+            <span class="rank-price">2000 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="nebula">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+        </div>
+
+        <div class="rank-card animate-float-in delay-3" data-rank="nova">
+          <img src="./PurpleChess - Store_files/point-multiplier-2.svg" alt="Purple chess medallion marked PCP with 2x below" class="rank-image">
+          <div class="rank-info">
+            <h3 class="rank-name">2x PurpleChess Point Multiplier</h3>
+            <span class="rank-price">2500 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="nova">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+        </div>
+
+        <div class="rank-card animate-float-in delay-4" data-rank="astral">
+          <img src="./PurpleChess - Store_files/point-multiplier-2-5.svg" alt="Purple chess medallion marked PCP with 2.5x below" class="rank-image">
+          <div class="rank-info">
+            <h3 class="rank-name">2.5x PurpleChess Point Multiplier</h3>
+            <span class="rank-price">3000 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="astral">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+        </div>
+
+        <div class="rank-card animate-float-in delay-4" data-rank="stellar">
+          <img src="./PurpleChess - Store_files/point-multiplier-3.svg" alt="Purple chess medallion marked PCP with 3x below" class="rank-image">
+          <div class="rank-info">
+            <h3 class="rank-name">3x PurpleChess Point Multiplier</h3>
+            <span class="rank-price">3500 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="stellar">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+        </div>
+
+        <div class="rank-card animate-float-in delay-5" data-rank="voidborn">
+          <img src="./PurpleChess - Store_files/point-multiplier-3-5.svg" alt="Purple chess medallion marked PCP with 3.5x below" class="rank-image">
+          <div class="rank-info">
+            <h3 class="rank-name">3.5x PurpleChess Point Multiplier</h3>
+            <span class="rank-price">4000 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="voidborn">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+        </div>
+
+        <div class="rank-card animate-float-in delay-5" data-rank="custom">
+          <img src="./PurpleChess - Store_files/point-multiplier-4.svg" alt="Purple chess medallion marked PCP with 4x below" class="rank-image">
+          <div class="rank-info">
+            <h3 class="rank-name">4x PurpleChess Point Multiplier</h3>
+            <span class="rank-price">4500 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="custom">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <div class="store-section" id="store-crates">
+      <h2 class="store-section-title">
+        <span class="icon icon-gift"></span>Shoutouts
+      </h2>
+      <p class="store-section-desc">Get a shoutout in the Club Chat and showcase your support!</p>
+      <div class="ranks-grid">
+        <div class="rank-card crate-card animate-float-in delay-3" data-crate="cosmetic-1x">
+          <img src="./PurpleChess - Store_files/shoutout-chat.svg" alt="Club Chat Shoutout" class="rank-image">
+          <div class="rank-info">
+            <h3 class="rank-name">Club Chat Shoutout</h3>
+            <span class="rank-price">200 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="cosmetic-1x">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+        </div>
+
+        <div class="rank-card crate-card animate-float-in delay-4" data-crate="cosmetic-3x">
+          <img src="./PurpleChess - Store_files/shoutout-chat-3x.svg" alt="3x Club Chat Shoutout" class="rank-image">
+          <div class="rank-info">
+            <h3 class="rank-name">3x Club Chat Shoutout</h3>
+            <span class="rank-price">500 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="cosmetic-3x">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+          <span class="crate-badge">Save 100 PCP!</span>
+        </div>
+      </div>
+    </div>
+
+        <div class="store-section" id="store-tags">
+      <h2 class="store-section-title">
+        <span class="icon icon-chat"></span>Club Spotlights
+      </h2>
+      <p class="store-section-desc">Get your profile featured in a Purple Forum!</p>
+      <div class="ranks-grid">
+        <div class="rank-card tag-card animate-float-in delay-3" data-tag="gg">
+          <img src="./PurpleChess - Store_files/spotlight-rating-trend.svg" alt="Rating Trend Spotlight" class="rank-image tag-image">
+          <div class="rank-info">
+            <h3 class="rank-name">Rating Trend Spotlight</h3>
+            <span class="rank-price">350 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="tag-gg">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+        </div>
+
+        <div class="rank-card tag-card animate-float-in delay-3" data-tag="pvp">
+          <img src="./PurpleChess - Store_files/spotlight-status-rating.svg" alt="Status and Rating Trend Spotlight" class="rank-image tag-image">
+          <div class="rank-info">
+            <h3 class="rank-name">Status and Rating Trend Spotlight</h3>
+            <span class="rank-price">450 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="tag-pvp">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+        </div>
+
+        <div class="rank-card tag-card animate-float-in delay-4" data-tag="rich">
+          <img src="./PurpleChess - Store_files/spotlight-full-game.svg" alt="Full Game Featured" class="rank-image tag-image">
+          <div class="rank-info">
+            <h3 class="rank-name">Full Game Featured</h3>
+            <span class="rank-price">2067 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="tag-rich">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+        </div>
+
+        <div class="rank-card tag-card animate-float-in delay-4" data-tag="toxic">
+          <img src="./PurpleChess - Store_files/spotlight-member-status.svg" alt="Member Joining Spotlight and Status" class="rank-image tag-image">
+          <div class="rank-info">
+            <h3 class="rank-name">Member Joining Spotlight and Status</h3>
+            <span class="rank-price">1550 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="tag-toxic">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+        </div>
+
+        <div class="rank-card tag-card animate-float-in delay-5" data-tag="bmw">
+          <img src="./PurpleChess - Store_files/spotlight-game-history.svg" alt="Game History Spotlight" class="rank-image tag-image">
+          <div class="rank-info">
+            <h3 class="rank-name">Game History Spotlight</h3>
+            <span class="rank-price">850 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="tag-bmw">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+        </div>
+
+        <div class="rank-card tag-card animate-float-in delay-5" data-tag="audi">
+          <img src="./PurpleChess - Store_files/spotlight-club-idea.svg" alt="Club Idea Spotlight" class="rank-image tag-image">
+          <div class="rank-info">
+            <h3 class="rank-name">Club Idea Spotlight</h3>
+            <span class="rank-price">850 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="tag-audi">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+        </div>
+
+        <div class="rank-card tag-card animate-float-in delay-6" data-tag="wemmbu">
+          <img src="./PurpleChess - Store_files/spotlight-friend.svg" alt="Buy a Spotlight For a Friend" class="rank-image tag-image">
+          <div class="rank-info">
+            <h3 class="rank-name">Buy a Spotlight For a Friend</h3>
+            <span class="rank-price">850 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="tag-wemmbu">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+        </div>
+
+        <div class="rank-card tag-card animate-float-in delay-6" data-tag="flamefrags">
+          <img src="./PurpleChess - Store_files/spotlight-friend-3x.svg" alt="3x Buy a Spotlight For a Friend" class="rank-image tag-image">
+          <div class="rank-info">
+            <h3 class="rank-name">3x Buy a Spotlight For a Friend</h3>
+            <span class="rank-price">850 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="tag-flamefrags">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+        </div>
+
+        <div class="rank-card tag-card animate-float-in delay-7" data-tag="dream">
+          <img src="./PurpleChess - Store_files/spotlight-puzzle-battle.svg" alt="Puzzle-Battle Spotlight" class="rank-image tag-image">
+          <div class="rank-info">
+            <h3 class="rank-name">Puzzle-Battle Spotlight</h3>
+            <span class="rank-price">850 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="tag-dream">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+        </div>
+
+        <div class="rank-card tag-card animate-float-in delay-7" data-tag="food">
+          <img src="./PurpleChess - Store_files/spotlight-tournament.svg" alt="Tournament Host Spotlight" class="rank-image tag-image">
+          <div class="rank-info">
+            <h3 class="rank-name">Tournament Host Spotlight</h3>
+            <span class="rank-price">3570 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="tag-food">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+        </div>
+
+        <div class="rank-card tag-card animate-float-in delay-8" data-tag="ftd">
+          <img src="./PurpleChess - Store_files/spotlight-tournament-cohost.svg" alt="Tournament Co-Host Spotlight" class="rank-image tag-image">
+          <div class="rank-info">
+            <h3 class="rank-name">Tournament Co-Host Spotlight</h3>
+            <span class="rank-price">2570 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="tag-ftd">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <div class="store-section" id="store-practice">
+      <h2 class="store-section-title">
+        <span class="icon icon-bolt"></span>One Week Tournament Host Pass
+      </h2>
+      <p class="store-section-desc">Be the host for every tournament we play that week!</p>
+          <div class="ranks-grid" style="grid-template-columns: 1fr;">
+        <div class="rank-card animate-float-in delay-3" data-pass="tournament-host">
+          <img src="./PurpleChess - Store_files/one-week-tournament-host.svg" alt="One Week Tournament Host Pass" class="rank-image">
+          <div class="rank-info">
+            <h3 class="rank-name"> One Week Tournament Host Pass</h3>
+            <span class="rank-price">3570 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="tournament-host">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+        </div>
+
+        <div class="rank-card animate-float-in delay-4" data-pass="tournament-cohost">
+          <img src="./PurpleChess - Store_files/one-week-tournament-cohost.svg" alt="One Week Tournament Co-Host Pass" class="rank-image">
+          <div class="rank-info">
+            <h3 class="rank-name">One Week Tournament Co-Host Pass</h3>
+            <span class="rank-price">2000 PCP</span>
+          </div>
+          <div class="rank-buttons">
+            <button class="rank-more-btn" data-rank-details="tournament-cohost">More info</button>
+            <button type="button" class="rank-buy-btn">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <div class="rank-details" id="rank-details-nebula">
+          <h2>1.5x PurpleChess Point Multiplier</h2>
+          <h3>Multiplier Details:</h3>
+          <ul class="rank-perks">
+            <li>Earn 1.5 times the PurpleChess Points from eligible point rewards</li>
+          </ul>
+          <p class="rank-note"><strong>Your redemption email to Liam will include this multiplier request.</strong></p>
+        </div>
+
+        <div class="rank-details" id="rank-details-nova">
+          <h2>2x PurpleChess Point Multiplier</h2>
+          <h3>Multiplier Details:</h3>
+          <ul class="rank-perks">
+            <li>Earn 2 times the PurpleChess Points from eligible point rewards</li>
+          </ul>
+          <p class="rank-note"><strong>Your redemption email to Liam will include this multiplier request.</strong></p>
+        </div>
+
+        <div class="rank-details" id="rank-details-astral">
+          <h2>2.5x PurpleChess Point Multiplier</h2>
+          <h3>Multiplier Details:</h3>
+          <ul class="rank-perks">
+            <li>Earn 2.5 times the PurpleChess Points from eligible point rewards</li>
+          </ul>
+          <p class="rank-note"><strong>Your redemption email to Liam will include this multiplier request.</strong></p>
+        </div>
+
+        <div class="rank-details" id="rank-details-stellar">
+          <h2>3x PurpleChess Point Multiplier</h2>
+          <h3>Multiplier Details:</h3>
+          <ul class="rank-perks">
+            <li>Earn 3 times the PurpleChess Points from eligible point rewards</li>
+          </ul>
+          <p class="rank-note"><strong>Your redemption email to Liam will include this multiplier request.</strong></p>
+        </div>
+
+        <div class="rank-details" id="rank-details-voidborn">
+          <h2>3.5x PurpleChess Point Multiplier</h2>
+          <h3>Multiplier Details:</h3>
+          <ul class="rank-perks">
+            <li>Earn 3.5 times the PurpleChess Points from eligible point rewards</li>
+          </ul>
+          <p class="rank-note"><strong>Your redemption email to Liam will include this multiplier request.</strong></p>
+        </div>
+
+        <div class="rank-details" id="rank-details-custom">
+          <h2>4x PurpleChess Point Multiplier</h2>
+          <h3>Multiplier Details:</h3>
+          <ul class="rank-perks">
+            <li>Earn 4 times the PurpleChess Points from eligible point rewards</li>
+          </ul>
+          <p class="rank-note"><strong>Your redemption email to Liam will include this multiplier request.</strong></p>
+        </div>
+
+    <div class="rank-details" id="rank-details-cosmetic-1x">
+      <h2>Cosmetic Crate Key</h2>
+      <h3>Contents:</h3>
+      <ul class="rank-perks">
+        <li>1x Cosmetic Crate Key on the Survival server</li>
+      </ul>
+      <p class="rank-note"><strong>Your redemption request will be emailed to Liam for fulfillment.</strong></p>
+    </div>
+
+    <div class="rank-details" id="rank-details-cosmetic-3x">
+      <h2>3x Cosmetic Crate Key</h2>
+      <h3>Contents:</h3>
+      <ul class="rank-perks">
+        <li>3x Cosmetic Crate Key on the Survival server</li>
+      </ul>
+      <div class="wiki-info-box" style="margin-top: 1rem;">
+        <div class="wiki-info-icon"><span class="icon icon-gift"></span></div>
+        <div class="wiki-info-content">
+          <h4>Bundle Savings</h4>
+          <p>Save $1.00 by purchasing this instead of three singular keys!</p>
+        </div>
+      </div>
+      <p class="rank-note"><strong>Your redemption request will be emailed to Liam for fulfillment.</strong></p>
+    </div>
+
+    <div class="rank-details" id="rank-details-tag-gg">
+      <h2>GG Tag</h2>
+      <ul class="rank-perks">
+        <li>Cosmetic chat tag for the Survival server</li>
+        <li>Displays [GG] before your name in chat</li>
+      </ul>
+      <p class="rank-note"><strong>Your redemption request will be emailed to Liam for fulfillment.</strong></p>
+    </div>
+
+    <div class="rank-details" id="rank-details-tag-pvp">
+      <h2>PVP Tag</h2>
+      <ul class="rank-perks">
+        <li>Cosmetic chat tag for the Survival server</li>
+        <li>Displays [PVP] before your name in chat</li>
+      </ul>
+      <p class="rank-note"><strong>Your redemption request will be emailed to Liam for fulfillment.</strong></p>
+    </div>
+
+    <div class="rank-details" id="rank-details-tag-rich">
+      <h2>RICH Tag</h2>
+      <ul class="rank-perks">
+        <li>Cosmetic chat tag for the Survival server</li>
+        <li>Displays [RICH] before your name in chat</li>
+      </ul>
+      <p class="rank-note"><strong>Your redemption request will be emailed to Liam for fulfillment.</strong></p>
+    </div>
+
+    <div class="rank-details" id="rank-details-tag-toxic">
+      <h2>TOXIC Tag</h2>
+      <ul class="rank-perks">
+        <li>Cosmetic chat tag for the Survival server</li>
+        <li>Displays [TOXIC] before your name in chat</li>
+      </ul>
+      <p class="rank-note"><strong>Your redemption request will be emailed to Liam for fulfillment.</strong></p>
+    </div>
+
+    <div class="rank-details" id="rank-details-tag-bmw">
+      <h2>BMW Tag</h2>
+      <ul class="rank-perks">
+        <li>Cosmetic chat tag for the Survival server</li>
+        <li>Displays [BMW] before your name in chat</li>
+      </ul>
+      <p class="rank-note"><strong>Your redemption request will be emailed to Liam for fulfillment.</strong></p>
+    </div>
+
+    <div class="rank-details" id="rank-details-tag-audi">
+      <h2>AUDI Tag</h2>
+      <ul class="rank-perks">
+        <li>Cosmetic chat tag for the Survival server</li>
+        <li>Displays [AUDI] before your name in chat</li>
+      </ul>
+      <p class="rank-note"><strong>Your redemption request will be emailed to Liam for fulfillment.</strong></p>
+    </div>
+
+    <div class="rank-details" id="rank-details-tag-wemmbu">
+      <h2>WEMMBU Tag</h2>
+      <ul class="rank-perks">
+        <li>Cosmetic chat tag for the Survival server</li>
+        <li>Displays [WEMMBU] before your name in chat</li>
+      </ul>
+      <p class="rank-note"><strong>Your redemption request will be emailed to Liam for fulfillment.</strong></p>
+    </div>
+
+    <div class="rank-details" id="rank-details-tag-flamefrags">
+      <h2>FLAMEFRAGS Tag</h2>
+      <ul class="rank-perks">
+        <li>Cosmetic chat tag for the Survival server</li>
+        <li>Displays [FLAMEFRAGS] before your name in chat</li>
+      </ul>
+      <p class="rank-note"><strong>Your redemption request will be emailed to Liam for fulfillment.</strong></p>
+    </div>
+
+    <div class="rank-details" id="rank-details-tag-dream">
+      <h2>DREAM Tag</h2>
+      <ul class="rank-perks">
+        <li>Cosmetic chat tag for the Survival server</li>
+        <li>Displays [DREAM] before your name in chat</li>
+      </ul>
+      <p class="rank-note"><strong>Your redemption request will be emailed to Liam for fulfillment.</strong></p>
+    </div>
+
+    <div class="rank-details" id="rank-details-tag-food">
+      <h2>FOOD Tag</h2>
+      <ul class="rank-perks">
+        <li>Cosmetic chat tag for the Survival server</li>
+        <li>Displays [FOOD] before your name in chat</li>
+      </ul>
+      <p class="rank-note"><strong>Your redemption request will be emailed to Liam for fulfillment.</strong></p>
+    </div>
+
+    <div class="rank-details" id="rank-details-tag-ftd">
+      <h2>FTD Tag</h2>
+      <ul class="rank-perks">
+        <li>Cosmetic chat tag for the Survival server</li>
+        <li>Displays [FTD] before your name in chat</li>
+      </ul>
+      <p class="rank-note"><strong>Your redemption request will be emailed to Liam for fulfillment.</strong></p>
+    </div>
+
+    <div class="rank-details" id="rank-details-tournament-host">
+      <h2>One Week Tournament Host Pass</h2>
+      <h3>What You Get:</h3>
+      <ul class="rank-perks">
+        <li>Coordinator position for one week.</li>
+        <li>Host your own <strong>Arena</strong> and <strong>Swiss</strong> tournaments. </li>
+      </ul>
+      <h3>Perfect For:</h3>
+      <ul class="rank-perks">
+        <li>Building PurpleChess Points</li>
+        <li>Playing a group of friends</li>
+        <li>Coordinator application tournament experience. </li>
+      </ul>
+      <p class="rank-note"><strong>Your redemption request will be emailed to Liam, who can coordinate your host week.</strong></p>
+    </div>
+
+    <div class="rank-details" id="rank-details-tournament-cohost">
+      <h2>One Week Tournament Co-Host Pass</h2>
+      <h3>What You Get:</h3>
+      <ul class="rank-perks">
+        <li>Coordinator position for one week.</li>
+        <li>Help organize and run Club tournaments</li>
+        <li>Coordinate tournament details with the host and staff team</li>
+      </ul>
+      <h3>Perfect For:</h3>
+      <ul class="rank-perks">
+        <li>Helping with community-hosted events</li>
+        <li>Coordinator application tournament experience. </li>
+        <li>Chess.com feature training.</li>
+      </ul>
+      <p class="rank-note"><strong>Your redemption request will be emailed to Liam, who can coordinate your co-host week.</strong></p>
+    </div>
+
+    <footer class="animate-fade-in delay-8">
+      <p>United By Chess - Driven By Strategy</p>
+      <p>© <span id="year">2026</span> PurpleChess</p>
+    </footer>
+  </div>
+
+    <div class="rank-modal" id="rankModal">
+    <div class="rank-modal-overlay"></div>
+    <div class="rank-modal-content" role="dialog" aria-modal="true" aria-label="Store details">
+      <button class="rank-modal-close" id="rankModalClose" aria-label="Close dialog">×</button>
+      <div class="rank-modal-body" id="rankModalBody">
+              </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const CHESS_API = "https://api.chess.com/pub";
+    const CLUB_ID = "purplechess";
+    const navBtns = document.querySelectorAll('.store-nav-btn');
+    const sections = document.querySelectorAll('.store-section');
+
+    navBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.dataset.category;
+        
+        // Update active button
+        navBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Show corresponding section
+        sections.forEach(section => {
+          section.classList.remove('active');
+          if (section.id === `store-${category}`) {
+            section.classList.add('active');
+          }
+        });
+      });
+    });
+
+    // Modal functionality
+    const modal = document.getElementById('rankModal');
+    const modalBody = document.getElementById('rankModalBody');
+    const modalContent = modal.querySelector('.rank-modal-content');
+    const modalClose = document.getElementById('rankModalClose');
+    const overlay = modal.querySelector('.rank-modal-overlay');
+    let activeBuyButton = null;
+
+    document.querySelectorAll('[data-rank-details]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const rankId = btn.dataset.rankDetails;
+        const details = document.getElementById(`rank-details-${rankId}`);
+        if (details) {
+          activeBuyButton = btn;
+          modalContent.setAttribute('aria-label', 'Store details');
+          modalContent.removeAttribute('aria-labelledby');
+          modalBody.innerHTML = details.innerHTML;
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+
+    function showModal() {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      if (activeBuyButton) activeBuyButton.focus();
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    overlay.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+
+    async function fetchJson(url, description) {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`${description} (HTTP ${response.status}).`);
+      }
+      return response.json();
+    }
+
+    async function fetchArchiveGames(username, joinedAt) {
+      const archiveData = await fetchJson(
+        `${CHESS_API}/player/${encodeURIComponent(username)}/games/archives`,
+        "Chess.com game archives are unavailable"
+      );
+      if (!Array.isArray(archiveData.archives)) {
+        throw new Error("Chess.com returned an invalid game archive list.");
+      }
+
+      const archives = archiveData.archives.filter(url => {
+        const month = url.match(/\/(\d{4})\/(\d{2})$/);
+        if (!month) return false;
+        const monthEnd = new Date(Number(month[1]), Number(month[2]), 0, 23, 59, 59).getTime() / 1000;
+        return monthEnd >= joinedAt;
+      });
+      const pending = [...archives];
+      const games = [];
+      const failures = [];
+
+      async function worker() {
+        while (pending.length && !failures.length) {
+          const archiveUrl = pending.shift();
+          if (!archiveUrl) return;
+          try {
+            const archive = await fetchJson(archiveUrl, "A Chess.com monthly archive is unavailable");
+            if (!Array.isArray(archive.games)) {
+              throw new Error("Chess.com returned an invalid monthly game archive.");
+            }
+            games.push(...archive.games);
+          } catch (error) {
+            failures.push(error);
+          }
+        }
+      }
+
+      await Promise.all(Array.from({ length: 3 }, worker));
+      if (failures.length) throw failures[0];
+      return games.filter(game => Number(game.end_time) >= joinedAt);
+    }
+
+    const storeContainer = document.getElementById("storeContainer");
+    const storeAccessForm = document.getElementById("storeAccessForm");
+    const storeAccessInput = document.getElementById("storeUsername");
+    const storeAccessStatus = document.getElementById("storeAccessStatus");
+    const storeAccessSubmit = document.getElementById("storeAccessSubmit");
+    const storeAccount = document.getElementById("storeAccount");
+    const storePointsButton = document.getElementById("storePointsButton");
+    const storeStatsPanel = document.getElementById("storeStatsPanel");
+    const storeSuccessBanner = document.getElementById("storeSuccessBanner");
+    const STORE_USERNAME_KEY = "voidsent-store-username";
+    let currentAccount = null;
+    let currentGames = [];
+    let currentSummary = null;
+
+    function formatPoints(value) {
+      return Number(value.toFixed(2)).toLocaleString(undefined, { maximumFractionDigits: 2 });
+    }
+
+    function loadAccountPurchases(username) {
+      const raw = localStorage.getItem(`voidsent-purchases-${username.toLowerCase()}`);
+      if (raw === null) return [];
+      let purchases;
+      try {
+        purchases = JSON.parse(raw);
+      } catch {
+        throw new Error("Your saved purchase history is unreadable. Please contact Liam before buying.");
+      }
+      if (!Array.isArray(purchases)) {
+        throw new Error("Your saved purchase history is invalid. Please contact Liam before buying.");
+      }
+      return purchases.map(purchase => {
+        const price = Number(purchase.price);
+        const purchasedAt = Number(purchase.purchasedAt);
+        const multiplier = purchase.multiplier == null ? null : Number(purchase.multiplier);
+        if (
+          typeof purchase.title !== "string" ||
+          !Number.isSafeInteger(price) || price < 0 ||
+          !Number.isFinite(purchasedAt) || purchasedAt <= 0 ||
+          (multiplier !== null && (!Number.isFinite(multiplier) || multiplier < 1))
+        ) {
+          throw new Error("Your saved purchase history is invalid. Please contact Liam before buying.");
+        }
+        return { title: purchase.title, price, purchasedAt, multiplier };
+      });
+    }
+
+    function readLegacySpentPoints(username) {
+      const value = localStorage.getItem(`voidsent-spent-${username.toLowerCase()}`);
+      if (value === null) return 0;
+      const spent = Number(value);
+      if (!Number.isSafeInteger(spent) || spent < 0) {
+        throw new Error("Your saved PCP spending record is invalid. Please contact Liam before buying.");
+      }
+      return spent;
+    }
+
+    function calculateAccountSummary(games, purchases, legacySpent) {
+      let tournamentGames = 0;
+      let earnedPoints = 0;
+      const multiplierPurchases = purchases.filter(purchase => purchase.multiplier !== null);
+      games.forEach(game => {
+        const tournament = typeof game.tournament === "string" && game.tournament.trim();
+        if (tournament) tournamentGames += 1;
+        const gamePoints = tournament ? 3 : 1;
+        const multiplier = multiplierPurchases.reduce(
+          (current, purchase) => purchase.purchasedAt < Number(game.end_time) ? Math.max(current, purchase.multiplier) : current,
+          1
+        );
+        earnedPoints += gamePoints * multiplier;
+      });
+      const spentPoints = legacySpent + purchases.reduce((sum, purchase) => sum + purchase.price, 0);
+      const currentMultiplier = multiplierPurchases.reduce((highest, purchase) => Math.max(highest, purchase.multiplier), 1);
+      const balance = Math.max(0, earnedPoints - spentPoints);
+      return {
+        regularGames: games.length - tournamentGames,
+        tournamentGames,
+        totalGames: games.length,
+        earnedPoints,
+        spentPoints,
+        balance,
+        currentMultiplier
+      };
+    }
+
+    function updateAccountDisplay() {
+      if (!currentAccount || !currentSummary) return;
+      document.getElementById("storeBalance").textContent = `${formatPoints(currentSummary.balance)} PCP`;
+      document.getElementById("storeAccountName").textContent = `Chess.com member: ${currentAccount.username}`;
+      document.getElementById("storeRegularGames").textContent = currentSummary.regularGames.toLocaleString();
+      document.getElementById("storeTournamentGames").textContent = currentSummary.tournamentGames.toLocaleString();
+      document.getElementById("storeTotalGames").textContent = currentSummary.totalGames.toLocaleString();
+      document.getElementById("storeEarnedPoints").textContent = `${formatPoints(currentSummary.earnedPoints)} PCP`;
+      document.getElementById("storeSpentPoints").textContent = `${formatPoints(currentSummary.spentPoints)} PCP`;
+      document.getElementById("storeMultiplier").textContent = `${currentSummary.currentMultiplier}×`;
+      const history = document.getElementById("storePurchaseHistory");
+      const list = document.getElementById("storePurchaseList");
+      list.replaceChildren();
+      currentAccount.purchases.forEach(purchase => {
+        const item = document.createElement("li");
+        const date = new Date(purchase.purchasedAt * 1000).toLocaleDateString();
+        item.textContent = `${purchase.title} — ${formatPoints(purchase.price)} PCP${purchase.multiplier ? ` · ${purchase.multiplier}×` : ""} · ${date}`;
+        list.append(item);
+      });
+      history.hidden = currentAccount.purchases.length === 0;
+    }
+
+    async function enterStore(username, joinedAt) {
+      currentAccount = { username, joinedAt };
+      localStorage.setItem(STORE_USERNAME_KEY, username);
+      storeAccessStatus.className = "store-access-status";
+      storeAccessStatus.textContent = "Membership verified. Loading your games and points…";
+      document.getElementById("storeAccess").hidden = true;
+      storeAccount.hidden = false;
+      storeContainer.classList.remove("store-locked");
+      document.getElementById("storeStatsStatus").textContent = "Loading your Chess.com game history…";
+      document.getElementById("storeBalance").textContent = "Loading PCP…";
+      document.querySelectorAll(".rank-card .rank-buy-btn").forEach(button => { button.disabled = true; });
+
+      try {
+        const [games, purchases, legacySpent] = await Promise.all([
+          fetchArchiveGames(username, joinedAt),
+          Promise.resolve(loadAccountPurchases(username)),
+          Promise.resolve(readLegacySpentPoints(username))
+        ]);
+        if (!currentAccount || currentAccount.username.toLowerCase() !== username.toLowerCase()) return;
+        currentGames = games;
+        currentAccount.purchases = purchases;
+        currentAccount.legacySpent = legacySpent;
+        currentSummary = calculateAccountSummary(games, purchases, legacySpent);
+        updateAccountDisplay();
+        document.getElementById("storeStatsStatus").textContent = "";
+        document.querySelectorAll(".rank-card .rank-buy-btn").forEach(button => { button.disabled = false; });
+      } catch (error) {
+        document.getElementById("storeBalance").textContent = "Points unavailable";
+        document.getElementById("storeStatsStatus").textContent = error.message || "Your points could not be loaded.";
+      }
+    }
+
+    async function verifyClubMember(username) {
+      const [club, memberData] = await Promise.all([
+        fetchJson(`${CHESS_API}/club/${CLUB_ID}`, "The PurpleChess club is unavailable"),
+        fetchJson(`${CHESS_API}/club/${CLUB_ID}/members`, "The PurpleChess member list is unavailable")
+      ]);
+      if (typeof club.name !== "string" || club.name.toLowerCase() !== "purplechess") {
+        throw new Error("Chess.com returned an unexpected club profile.");
+      }
+      const normalizedUsername = username.trim().toLowerCase();
+      const member = ["weekly", "monthly", "all_time"]
+        .flatMap(group => Array.isArray(memberData[group]) ? memberData[group] : [])
+        .find(item => typeof item.username === "string" && item.username.toLowerCase() === normalizedUsername);
+      if (!member) {
+        throw new Error("That Chess.com username is not currently a member of PurpleChess.");
+      }
+      const joinedAt = Number(member.joined);
+      if (!Number.isFinite(joinedAt) || joinedAt <= 0) {
+        throw new Error("Chess.com did not provide this member's club join date.");
+      }
+      return { username: member.username, joinedAt };
+    }
+
+    storeAccessForm.addEventListener("submit", async event => {
+      event.preventDefault();
+      const username = storeAccessInput.value.trim();
+      if (!username) return;
+      storeAccessSubmit.disabled = true;
+      storeAccessSubmit.textContent = "Checking club membership…";
+      storeAccessStatus.className = "store-access-status";
+      storeAccessStatus.textContent = "Verifying your Chess.com username with PurpleChess…";
+      try {
+        const member = await verifyClubMember(username);
+        await enterStore(member.username, member.joinedAt);
+      } catch (error) {
+        storeAccessStatus.className = "store-access-status error";
+        storeAccessStatus.textContent = error.message || "Membership could not be verified.";
+      } finally {
+        storeAccessSubmit.disabled = false;
+        storeAccessSubmit.textContent = "Enter the store";
+      }
+    });
+
+    storePointsButton.addEventListener("click", () => {
+      const expanded = storePointsButton.getAttribute("aria-expanded") === "true";
+      storePointsButton.setAttribute("aria-expanded", String(!expanded));
+      storeStatsPanel.hidden = expanded;
+    });
+
+    document.getElementById("storeSignOut").addEventListener("click", () => {
+      localStorage.removeItem(STORE_USERNAME_KEY);
+      currentAccount = null;
+      currentGames = [];
+      currentSummary = null;
+      storeSuccessBanner.hidden = true;
+      storeAccount.hidden = true;
+      document.getElementById("storeAccess").hidden = false;
+      storeStatsPanel.hidden = true;
+      storePointsButton.setAttribute("aria-expanded", "false");
+      storeContainer.classList.add("store-locked");
+      storeAccessStatus.className = "store-access-status";
+      storeAccessStatus.textContent = "";
+      storeAccessInput.value = "";
+      storeAccessInput.focus();
+    });
+
+    function showPurchaseDialog(button) {
+      if (!currentAccount || !currentSummary) {
+        throw new Error("Verify your club membership and load your PCP balance before making a purchase.");
+      }
+      const card = button.closest(".rank-card");
+      const title = card.querySelector(".rank-name").textContent.trim();
+      const priceText = card.querySelector(".rank-price").textContent;
+      const priceMatch = priceText.match(/[\d,]+/);
+      const price = priceMatch ? Number(priceMatch[0].replaceAll(",", "")) : NaN;
+      if (!Number.isSafeInteger(price) || price < 0) {
+        throw new Error(`Could not read the PCP price for ${title}.`);
+      }
+      const multiplierMatch = title.match(/(\d+(?:\.\d+)?)x\s+PurpleChess Point Multiplier/i);
+      const multiplier = multiplierMatch ? Number(multiplierMatch[1]) : null;
+      const canAfford = currentSummary.balance >= price;
+
+      activeBuyButton = button;
+      modalContent.setAttribute("aria-labelledby", "purchaseModalTitle");
+      modalContent.removeAttribute("aria-label");
+      modalBody.innerHTML = `
+        <div class="purchase-product">
+          <h2 id="purchaseModalTitle">${title}</h2>
+          <p>Purchase for ${price.toLocaleString()} PCP</p>
+        </div>
+        <p class="purchase-intro">Chess.com member: <strong id="verifiedPurchaseUsername"></strong><br>Available balance: <strong>${formatPoints(currentSummary.balance)} PCP</strong>${multiplier ? `<br>Multiplier after purchase: <strong>${multiplier}×</strong>` : ""}</p>
+        <button type="button" class="rank-buy-btn purchase-redeem" id="verifyPurchase" ${canAfford ? "" : "disabled"}>Verify Purchase</button>
+        <p class="purchase-status${canAfford ? "" : " error"}" id="purchaseStatus" role="status" aria-live="polite">${canAfford ? "Confirm this purchase to deduct the PCP and add the item to your account." : `You need ${formatPoints(price - currentSummary.balance)} more PCP to buy this item.`}</p>
+        <p class="store-verify-note">Points and purchase history are saved in this browser. Redeeming opens a prefilled email request to Liam.</p>`;
+      document.getElementById("verifiedPurchaseUsername").textContent = currentAccount.username;
+      showModal();
+
+      document.getElementById("verifyPurchase").addEventListener("click", () => {
+        const status = document.getElementById("purchaseStatus");
+        try {
+          const currentPurchases = loadAccountPurchases(currentAccount.username);
+          const legacySpent = readLegacySpentPoints(currentAccount.username);
+          const latestSummary = calculateAccountSummary(currentGames, currentPurchases, legacySpent);
+          if (latestSummary.balance < price) {
+            currentAccount.purchases = currentPurchases;
+            currentAccount.legacySpent = legacySpent;
+            currentSummary = latestSummary;
+            updateAccountDisplay();
+            status.className = "purchase-status error";
+            status.textContent = `Your balance changed. You need ${formatPoints(price - latestSummary.balance)} more PCP.`;
+            document.getElementById("verifyPurchase").disabled = true;
+            return;
+          }
+
+          const purchasedAt = Date.now() / 1000;
+          const purchase = { title, price, purchasedAt, multiplier };
+          currentPurchases.push(purchase);
+          localStorage.setItem(
+            `voidsent-purchases-${currentAccount.username.toLowerCase()}`,
+            JSON.stringify(currentPurchases)
+          );
+          currentAccount.purchases = currentPurchases;
+          currentAccount.legacySpent = legacySpent;
+          currentSummary = calculateAccountSummary(currentGames, currentPurchases, legacySpent);
+          updateAccountDisplay();
+
+          storeSuccessBanner.replaceChildren();
+          const heading = document.createElement("strong");
+          heading.textContent = `Purchased: ${title}`;
+          storeSuccessBanner.append(heading);
+          const message = document.createElement("span");
+          message.textContent = multiplier
+            ? ` Your ${multiplier}× multiplier is now active for games played after this purchase.`
+            : ` ${formatPoints(price)} PCP has been deducted from your balance.`;
+          storeSuccessBanner.append(message);
+          const nextBalance = formatPoints(currentSummary.balance);
+          const subject = `PurpleChess reward redemption: ${title}`;
+          const emailBody = [
+            `Chess.com member: ${currentAccount.username}`,
+            `Reward redeemed: ${title}`,
+            `Games since joining: ${currentSummary.totalGames}`,
+            `Tournament games: ${currentSummary.tournamentGames}`,
+            "",
+            `Previous PCP balance: ${formatPoints(latestSummary.balance)}`,
+            `Reward cost: -${price}`,
+            `Current PCP balance: ${formatPoints(latestSummary.balance)} - ${price} = ${nextBalance}`,
+            multiplier ? `Multiplier activated: ${multiplier}×` : "",
+            "",
+            "Please approve and fulfill this PurpleChess Points redemption."
+          ].filter(Boolean).join("\n");
+          const emailLink = document.createElement("a");
+          emailLink.href = `mailto:liam.lesser@imperial-academy.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+          emailLink.textContent = "Open redemption email to Liam";
+          emailLink.target = "_blank";
+          emailLink.rel = "noopener";
+          storeSuccessBanner.append(document.createElement("br"), emailLink);
+          emailLink.click();
+
+          closeModal();
+          storeSuccessBanner.hidden = false;
+          storeSuccessBanner.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        } catch (error) {
+          status.className = "purchase-status error";
+          status.textContent = error.message || "The purchase could not be saved.";
+        }
+      });
+    }
+
+    document.querySelectorAll(".rank-card .rank-buy-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        try {
+          showPurchaseDialog(button);
+        } catch (error) {
+          window.alert(error.message || "This item could not be opened.");
+        }
+      });
+    });
+
+    const savedUsername = localStorage.getItem(STORE_USERNAME_KEY);
+    if (savedUsername) {
+      storeAccessInput.value = savedUsername;
+      storeAccessForm.requestSubmit();
+    }
+
+    const sidebarYear = document.getElementById("sidebarYear");
+    if (sidebarYear) sidebarYear.textContent = new Date().getFullYear();
+  </script>
+
+
+
+  <script src="./site-audio.js" defer></script>
+</body></html>

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PurpleChess - Apply</title>
+  <link rel="icon" type="image/png" href="./PurpleChess-logo.png">
+
+
+  <style>
+    .apply-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .apply-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .apply-subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+    }
+
+    .apply-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .apply-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .apply-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .apply-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .apply-card-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .apply-card-icon img {
+      width: 40px;
+      height: 40px;
+    }
+
+    /* Mod card - Blue theme */
+    .apply-card-mod .apply-card-icon {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1));
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .apply-card-mod:hover {
+      border-color: rgba(59, 130, 246, 0.5);
+      box-shadow: 0 12px 40px rgba(59, 130, 246, 0.15);
+    }
+
+    .apply-card-mod .apply-btn {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+    }
+
+    .apply-card-mod .apply-btn:hover {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    }
+
+    /* Builder card - Orange theme */
+    .apply-card-builder .apply-card-icon {
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.2), rgba(249, 115, 22, 0.1));
+      border: 1px solid rgba(249, 115, 22, 0.3);
+    }
+
+    .apply-card-builder:hover {
+      border-color: rgba(249, 115, 22, 0.5);
+      box-shadow: 0 12px 40px rgba(249, 115, 22, 0.15);
+    }
+
+    .apply-card-builder .apply-btn {
+      background: linear-gradient(135deg, #f97316, #ea580c);
+    }
+
+    .apply-card-builder .apply-btn:hover {
+      background: linear-gradient(135deg, #ea580c, #c2410c);
+    }
+
+    /* Media card - Pink/Magenta theme */
+    .apply-card-media .apply-card-icon {
+      background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(236, 72, 153, 0.1));
+      border: 1px solid rgba(236, 72, 153, 0.3);
+      color: #ec4899;
+    }
+
+    .apply-card-media {
+      grid-column: 1 / -1;
+    }
+
+    .apply-card-media:hover {
+      border-color: rgba(236, 72, 153, 0.5);
+      box-shadow: 0 12px 40px rgba(236, 72, 153, 0.15);
+    }
+
+    .apply-card-media .apply-btn {
+      background: linear-gradient(135deg, #ec4899, #db2777);
+    }
+
+    .apply-card-media .apply-btn:hover {
+      background: linear-gradient(135deg, #db2777, #be185d);
+    }
+
+    .apply-card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .apply-card-subtitle {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .apply-card-description {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .apply-requirements {
+      flex: 1;
+    }
+
+    .apply-requirements h4 {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .apply-requirements ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.5rem 0;
+    }
+
+    .apply-requirements li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .apply-requirements li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+
+    .apply-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      margin-top: auto;
+    }
+
+    .apply-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Media perks section */
+    .media-perks {
+      background: rgba(236, 72, 153, 0.05);
+      border: 1px solid rgba(236, 72, 153, 0.2);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .media-perks h4 {
+      color: #ec4899;
+      margin: 0 0 0.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .media-perks ul {
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+
+    .media-perks li {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .media-perks li::before {
+      content: none;
+      padding-left: 0;
+    }
+
+    .requirements-section {
+      margin-bottom: 1rem;
+    }
+
+    .requirements-section h5 {
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      margin: 0 0 0.5rem 0;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .apply-title {
+        font-size: 2rem;
+      }
+
+      .apply-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .apply-card {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+  <script defer src="./PurpleChess - Apply_files/modulepreload-polyfill-B5Qt9EMX.js"></script>
+  <script defer src="./PurpleChess - Apply_files/loader-DEKCah66.js"></script>
+  
+  <script defer src="./PurpleChess - Apply_files/sidebar-BQ50I4aK.js"></script>
+  <link rel="stylesheet" href="./PurpleChess - Apply_files/loader-CQrtZOB-.css">
+  <link rel="stylesheet" href="./PurpleChess - Apply_files/collect-m-Nt8DPr.css">
+  <link rel="stylesheet" href="./site-audio.css">
+</head>
+
+<body>
+  <div class="page-loader" id="pageLoader" role="status" aria-live="polite">
+    <div class="loader-card">
+      <div class="loader-content">
+        <img src="./PurpleChess-logo.png" alt="" class="loader-logo">
+        <div class="loader">
+          <span>Loading</span>
+          <div class="loader-words" aria-hidden="true">
+            <span class="loader-word">the page</span>
+            <span class="loader-word">the server</span>
+            <span class="loader-word">your game</span>
+            <span class="loader-word">the next move</span>
+            <span class="loader-word">the fun</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>window.addEventListener('load',function(){var l=document.getElementById('pageLoader');if(l){l.classList.add('hidden');setTimeout(function(){l.remove()},500)}});</script>
+
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
+    <span class="icon icon-arrow-right"></span>
+  </button>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <aside class="site-sidebar" id="siteSidebar">
+    <a href="index.html" class="sidebar-header">
+      <img src="./PurpleChess-logo.png" alt="PurpleChess" class="sidebar-logo">
+      <span class="sidebar-title">Home</span>
+    </a>
+    
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-group">
+        <span class="sidebar-group-title">Play</span>
+        <a href="PurpleChess%20-%20Play.html" class="sidebar-nav-link">
+          <span class="icon icon-play"></span>
+          <span>Play</span>
+        </a>
+        <a href="PurpleChess%20-%20Vote.html" class="sidebar-nav-link">
+          <span class="icon icon-check"></span>
+          <span>Vote</span>
+        </a>
+        <a href="PurpleChess%20-%20Combat%20Ranking%20System.html" class="sidebar-nav-link">
+          <img src="./PurpleChess - Apply_files/icon-DE1O5OzK.png" alt="" class="icon-trophy-img">
+          <span>Rankings</span>
+        </a>
+      </div>
+      
+      <div class="sidebar-nav-group">
+        <span class="sidebar-group-title">Information</span>
+        <a href="PurpleChess%20-%20Wiki.html" class="sidebar-nav-link">
+          <span class="icon icon-book"></span>
+          <span>Wiki</span>
+        </a>
+        <a href="PurpleChess%20-%20Rules.html" class="sidebar-nav-link">
+          <span class="icon icon-scale"></span>
+          <span>Rules</span>
+        </a>
+        <a href="PurpleChess%20-%20FAQ.html" class="sidebar-nav-link">
+          <span class="icon icon-question"></span>
+          <span>FAQ</span>
+        </a>
+        <a href="PurpleChess%20-%20Changelog.html" class="sidebar-nav-link">
+          <span class="icon icon-clipboard-list"></span>
+          <span>Changelog</span>
+        </a>
+      </div>
+      
+      <div class="sidebar-nav-group">
+        <span class="sidebar-group-title">Community</span>
+        <a href="PurpleChess%20-%20Wiki.html#staff" class="sidebar-nav-link">
+          <span class="icon icon-shield"></span>
+          <span>Staff</span>
+        </a>
+        <a href="PurpleChess%20-%20Media.html" class="sidebar-nav-link">
+          <span class="icon icon-video"></span>
+          <span>Media</span>
+        </a>
+        <a href="PurpleChess%20-%20Apply.html" class="sidebar-nav-link active">
+          <span class="icon icon-document"></span>
+          <span>Apply</span>
+        </a>
+        <a href="https://teams.live.com/l/invite/FAAlCMldAfPt_vbtQ?v=g1" class="sidebar-nav-link" target="_blank">
+          <span class="icon icon-chat"></span>
+          <span>Teams</span>
+        </a>
+      </div>
+      
+      <div class="sidebar-nav-group">
+        <span class="sidebar-group-title">Store</span>
+        <a href="PurpleChess%20-%20Store.html" class="sidebar-nav-link">
+          <span class="icon icon-store"></span>
+          <span>Store</span>
+        </a>
+      </div>
+    </nav>
+    
+    <div class="sidebar-footer">
+      <p>© <span id="sidebarYear">2027</span> PurpleChess</p>
+    </div>
+  </aside>
+
+  <div class="apply-container has-sidebar">
+    <div class="logo-section">
+      <img src="./PurpleChess-logo.png" alt="PurpleChess logo" class="v-logo">
+    </div>
+
+    <h1 class="apply-title animate-slide-up delay-1">
+      <span class="icon icon-document"></span>Apply to Join Our Team
+    </h1>
+    <p class="apply-subtitle animate-slide-up delay-2">Choose a position below and submit your application!</p>
+
+    <div class="apply-grid">
+            <div class="apply-card apply-card-mod animate-float-in delay-3">
+        <div class="apply-card-header">
+          <div class="apply-card-icon">
+            <img src="./PurpleChess - Apply_files/blue-staff-EYvaG7tf.png" alt="Staff">
+          </div>
+          <div>
+            <h3 class="apply-card-title">Admin Application</h3>
+            <p class="apply-card-subtitle">Moderator Position</p>
+          </div>
+        </div>
+        
+        <p class="apply-card-description">
+          Help maintain a positive environment and assist members on the server. Admins enforce rules and ensure everyone has a great experience.
+        </p>
+
+        <div class="apply-requirements">
+          <h4><span class="icon icon-clipboard-list"></span> Requirements</h4>
+          <ul>
+            <li>You must be at least 14 years old</li>
+            <li>You must have a good standing with PurpleChess (No frequent mutes or severe bans)</li>
+            <li>You must be able to communicate clearly and respectfully in English</li>
+            <li>You must be able to be online for 4+ hours every week</li>
+            <li>You must have an operational Teams account and check it regularly</li>
+            <li>You must show maturity, patience, and a willingness to assist members without favoritism</li>
+          </ul>
+        </div>
+
+        <a href="https://forms.cloud.microsoft/r/tMqVEhWBer" target="_blank" class="apply-btn">
+          <span class="icon icon-document"></span>
+          Apply Now
+        </a>
+      </div>
+
+            <div class="apply-card apply-card-builder animate-float-in delay-4">
+        <div class="apply-card-header">
+          <div class="apply-card-icon">
+            <img src="./PurpleChess - Apply_files/orange-staff-D-zCeUrN.png" alt="Builder">
+          </div>
+          <div>
+            <h3 class="apply-card-title">Coordinator</h3>
+            <p class="apply-card-subtitle">Creator Position</p>
+          </div>
+        </div>
+        
+        <p class="apply-card-description">
+          Create tournamentrs and help create the arena world. Coordinators lead events and manage the server's tournament direction.
+        </p>
+
+        <div class="apply-requirements">
+          <h4><span class="icon icon-clipboard-list"></span> Requirements</h4>
+          <ul>
+            <li>You must be at least 14 years old</li>
+            <li>You must have a good standing with PurpleChess (No frequent mutes or severe bans)</li>
+            <li>You must be able to communicate clearly and respectfully in English</li>
+            <li>You must have an operational Teams account</li>
+            <li>You must show maturity, patience, and a willingness to assist players without favoritism</li>
+            <li>You must know and understand how to create and manage specific tournament settings</li>
+          </ul>
+        </div>
+
+        <a href="https://forms.cloud.microsoft/r/tMqVEhWBer" target="_blank" class="apply-btn">
+          <span class="icon icon-document"></span>
+          Apply Now
+        </a>
+      </div>
+
+            <div class="apply-card apply-card-media animate-float-in delay-5">
+        <div class="apply-card-header">
+          <div class="apply-card-icon">
+            <span class="icon icon-terminal" aria-hidden="true"></span>
+          </div>
+          <div>
+            <h3 class="apply-card-title">Developer Application</h3>
+            <p class="apply-card-subtitle">Creator Position</p>
+          </div>
+        </div>
+        
+        <p class="apply-card-description">
+          Join our Developer program! This is for website developers and designers.
+        </p>
+
+        <div class="media-perks">
+          <h4><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='currentColor'%20aria-hidden='true'%20data-slot='icon'%3e%3cpath%20d='M4.5%204.5a3%203%200%200%200-3%203v9a3%203%200%200%200%203%203h8.25a3%203%200%200%200%203-3v-9a3%203%200%200%200-3-3H4.5ZM19.94%2018.75l-2.69-2.69V7.94l2.69-2.69c.944-.945%202.56-.276%202.56%201.06v11.38c0%201.336-1.616%202.005-2.56%201.06Z'/%3e%3c/svg%3e" alt="" style="width: 1.1em; height: 1.1em; vertical-align: -0.15em; filter: brightness(0) saturate(100%) invert(58%) sepia(77%) saturate(1647%) hue-rotate(299deg) brightness(97%) contrast(95%);"> Perks of the Rank</h4>
+          <ul>
+            <li>Website access</li>
+            <li>Coordinator Control</li>
+            <li>Promotion across our Teams Chat, website, and announcements</li>
+            <li>More coming soon!</li>
+          </ul>
+        </div>
+
+        <div class="apply-requirements">
+          <h4><span class="icon icon-clipboard-list"></span> Requirements</h4>
+          
+          <div class="requirements-section">
+            <h5>Website Developers:</h5>
+            <ul>
+              <li>Must have a basic understanding of HTML, CSS, and JavaScript</li>
+              <li>Must have a GitHub account</li>
+              <li>Must have Microsoft Teams for Developers Chat</li>
+              <li>Willing to do what Liam Lesser says, despite personal preferences</li>
+              <li>Quality work and attention to detail</li>
+            </ul>
+          </div>
+
+          <div class="requirements-section">
+            <h5>Chess.com Club Designers:</h5>
+            <ul>
+              <li>Online presence</li>
+              <li>Basic understanding of Chess.com club functions</li>
+              <li>Must have a Microsoft Teams account for Developers Chat</li>
+              <li>Willing to do what Liam Lesser says, despite personal preferences</li>
+            </ul>
+          </div>
+
+          <div class="requirements-section">
+            <h5>General Expectations:</h5>
+            <ul>
+              <li>Respectful and professional behavior</li>
+              <li>Follow all server rules</li>
+              <li>Create quality work.</li>
+              <li>Promote the club and comment on posts.</li>
+            </ul>
+          </div>
+        </div>
+
+        <a href="https://forms.cloud.microsoft/r/tMqVEhWBer" target="_blank" class="apply-btn">
+          <span class="icon icon-document"></span>
+          Apply Now
+        </a>
+      </div>
+    </div>
+
+    <footer class="animate-fade-in delay-6">
+      <p>United By Chess - Driven By Strategy</p>
+      <p>© <span id="year">2027</span> PurpleChess</p>
+    </footer>
+  </div>
+
+  <script>
+    const year = new Date().getFullYear();
+    document.getElementById("year").textContent = year;
+    const sidebarYear = document.getElementById("sidebarYear");
+    if (sidebarYear) sidebarYear.textContent = year;
+  </script>
+
+
+
+  <script src="./site-audio.js" defer></script>
+</body></html>

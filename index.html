@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b14">
+  <title>PurpleChess</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      background: #090b14;
+      color: #eef0f8;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 50% 0, rgba(125, 62, 178, .2), transparent 55%),
+        #090b14;
+    }
+
+    main {
+      width: min(1080px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 72px 0 48px;
+    }
+
+    .eyebrow {
+      color: #c99af3;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 12px 0 10px;
+      font-size: clamp(2.4rem, 7vw, 4.5rem);
+      letter-spacing: -.055em;
+    }
+
+    .intro {
+      max-width: 650px;
+      color: #aeb3c7;
+      font-size: 1.08rem;
+      line-height: 1.7;
+    }
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .page-card {
+      display: block;
+      min-height: 142px;
+      padding: 22px;
+      border: 1px solid #25283a;
+      border-radius: 14px;
+      background: rgba(21, 24, 39, .84);
+      color: inherit;
+      text-decoration: none;
+      transition: border-color .2s ease, transform .2s ease, background .2s ease;
+    }
+
+    .page-card:hover,
+    .page-card:focus-visible {
+      transform: translateY(-3px);
+      border-color: #9c67d0;
+      background: #1b1e31;
+      outline: none;
+    }
+
+    .page-card h2 {
+      margin: 0 0 8px;
+      font-size: 1.2rem;
+    }
+
+    .page-card p {
+      margin: 0;
+      color: #aeb3c7;
+      font-size: .94rem;
+      line-height: 1.55;
+    }
+
+    footer {
+      margin-top: 36px;
+      padding-top: 20px;
+      border-top: 1px solid #25283a;
+      color: #9298ad;
+      font-size: .88rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      main { padding-top: 48px; }
+      .page-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Community website</p>
+    <h1>PurpleChess</h1>
+    <p class="intro">Browse the PurpleChess pages below, including server information, rules, rankings, and community resources.</p>
+
+    <nav class="page-grid" aria-label="PurpleChess pages">
+      <a class="page-card" href="./PurpleChess%20-%20Play.html">
+        <h2>Play</h2>
+        <p>Server details, quick start guide, and gameplay information.</p>
+      </a>
+      <a class="page-card" href="./PurpleChess%20-%20Vote.html">
+        <h2>Vote</h2>
+        <p>Voting information and resource listings.</p>
+      </a>
+      <a class="page-card" href="./PurpleChess%20-%20Combat%20Ranking%20System.html">
+        <h2>Rankings</h2>
+        <p>Open the saved PurpleRanking skill ranking page.</p>
+      </a>
+      <a class="page-card" href="./PurpleChess%20-%20Wiki.html">
+        <h2>Wiki</h2>
+        <p>Server information, guides, features, and FAQ.</p>
+      </a>
+      <a class="page-card" href="./PurpleChess%20-%20Rules.html">
+        <h2>Rules</h2>
+        <p>Read the saved server rules.</p>
+      </a>
+      <a class="page-card" href="./PurpleChess%20-%20FAQ.html">
+        <h2>FAQ</h2>
+        <p>Answers to frequently asked questions.</p>
+      </a>
+      <a class="page-card" href="./PurpleChess%20-%20Changelog.html">
+        <h2>Changelog</h2>
+        <p>Saved server updates and announcements.</p>
+      </a>
+      <a class="page-card" href="./PurpleChess%20-%20Media.html">
+        <h2>Media</h2>
+        <p>Browse the saved community media page.</p>
+      </a>
+      <a class="page-card" href="./PurpleChess%20-%20Apply.html">
+        <h2>Apply</h2>
+        <p>Saved staff and community application information.</p>
+      </a>
+      <a class="page-card" href="./PurpleChess%20-%20Store.html">
+        <h2>Store</h2>
+        <p>Saved rank and store information.</p>
+      </a>
+    </nav>
+
+    <footer>
+      Page content and saved assets are included here. Links to external services, such as Teams Chat, voting sites, and Chess.com require an internet connection.
+    </footer>
+  </main>
+</body>
+</html>
